@@ -32,9 +32,8 @@ pipeline {
     }
 
     stage('Deploy') {
-      
       when {
-       branch "master" 
+        branch 'master'
       }
       steps {
         input(message: 'Are you sure to deploy', ok: 'Yes')
@@ -43,6 +42,6 @@ pipeline {
 
   }
   environment {
-    SELENIUM = 'c:\\driver\\win'
+    SELENIUM = 'c:\\driver\\wins'
   }
 }
