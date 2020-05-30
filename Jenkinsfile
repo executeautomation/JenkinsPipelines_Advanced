@@ -6,7 +6,7 @@ pipeline {
         stage('Get Env') {
           steps {
             echo "Get the chromedriver path : ${SELENIUM}"
-            pwsh 'Write-Output "Hello World"'
+            pwsh 'Write-Output "Hello Worlds"'
           }
         }
 
