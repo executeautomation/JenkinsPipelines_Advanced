@@ -12,11 +12,12 @@ pipeline {
 
         stage('Script execution') {
           steps {
-            script{
+            script {
               def msg = powershell(returnStdout: true, script: "./script/build.ps1")
               println msg
               VARIABLE=msg
             }
+
           }
         }
 
@@ -33,14 +34,25 @@ pipeline {
     }
 
     stage('Deployed') {
-      steps {
-        writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
+      parallel {
+        stage('Deployed') {
+          steps {
+            writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
+          }
+        }
+
+        stage('Archive') {
+          steps {
+            archiveArtifacts 'deployed.txt'
+          }
+        }
+
       }
     }
 
   }
   environment {
     SELENIUM = 'c:\\driver\\win'
-    VARIABLE=''
+    VARIABLE = ''
   }
 }
