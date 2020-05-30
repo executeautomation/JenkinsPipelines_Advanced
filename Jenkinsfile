@@ -12,7 +12,7 @@ pipeline {
 
         stage('Script execution') {
           steps {
-            powershell '''
+            def msg = powershell '''
                 try
                 {
                     $response = Invoke-WebRequest -Uri http://localhost:81/ -ErrorAction Stop
@@ -25,6 +25,7 @@ pipeline {
                 }
                 $StatusCode
               '''
+            println msg
           }
         }
 
