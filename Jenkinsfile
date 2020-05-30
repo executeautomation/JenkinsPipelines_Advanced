@@ -33,9 +33,9 @@ pipeline {
       }
     }
 
-    stage('Deployed') {
+    stage('Post Build') {
       parallel {
-        stage('Deployed') {
+        stage('Generate File') {
           steps {
             writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
           }
