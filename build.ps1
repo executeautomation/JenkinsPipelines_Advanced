@@ -1,1 +1,1 @@
-write-output "Hello all"
+Write-Output "Hello all from file"
