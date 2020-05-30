@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        echo 'Get the chromedriver path : "${SELENIUM}"'
+        echo "Get the chromedriver path : ${SELENIUM}"
         sh 'echo "Hello everyone"'
       }
     }
