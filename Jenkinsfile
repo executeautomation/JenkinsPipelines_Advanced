@@ -12,8 +12,10 @@ pipeline {
 
         stage('Script execution') {
           steps {
-            def msg = powershell(returnStdout: true, script: ".build.ps1")
-            println msg
+            script{
+              def msg = powershell(returnStdout: true, script: ".build.ps1")
+              println msg
+            }
           }
         }
 
