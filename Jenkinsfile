@@ -4,7 +4,7 @@ pipeline {
     stage('error') {
       steps {
         echo "Get the chromedriver path : ${SELENIUM}"
-        powershell(".build.ps1")
+        powershell(". '.build.ps1'")
       }
     }
 
