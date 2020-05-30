@@ -26,6 +26,7 @@ pipeline {
                 }
                 $StatusCode
               '''
+              return true
             }
           }
         }
