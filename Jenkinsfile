@@ -42,7 +42,7 @@ pipeline {
 
     stage('Deployed') {
       steps {
-        writeFile(file: 'deployed.txt', text: 'deployed to "${SELENIUM}"')
+        writeFile(file: 'deployed.txt', text: "deployed to ${SELENIUM}")
       }
     }
 
