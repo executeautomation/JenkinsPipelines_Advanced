@@ -12,7 +12,12 @@ pipeline {
 
         stage('') {
           steps {
-            waitUntil(initialRecurrencePeriod: 20)
+            waitUntil{
+              powershell '''
+                iwr http://localhost:81/
+                return true
+              '''
+            }
           }
         }
 
