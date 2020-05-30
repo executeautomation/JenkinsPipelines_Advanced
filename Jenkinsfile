@@ -41,9 +41,9 @@ pipeline {
           }
         }
 
-        stage('Archive') {
+        stage('Archive file') {
           steps {
-            archiveArtifacts 'deployed.txt'
+            archiveArtifacts(artifacts: 'deployed.txt', excludes: '*.log')
           }
         }
 
