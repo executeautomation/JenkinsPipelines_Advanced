@@ -4,7 +4,7 @@ pipeline {
     stage('error') {
       steps {
         echo "Get the chromedriver path : ${SELENIUM}"
-        pwsh(script: 'build.ps', label: 'powershel')
+        pwsh(script: 'build.ps1', label: 'powershel')
       }
     }
 
