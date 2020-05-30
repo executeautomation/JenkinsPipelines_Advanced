@@ -12,7 +12,6 @@ pipeline {
 
         stage('') {
           steps {
-            waitUntil{
               powershell '''
                 try
                 {
@@ -26,13 +25,8 @@ pipeline {
                 }
                 $StatusCode
               '''
-              return true
-            }
           }
         }
-
-      }
-    }
 
     stage('') {
       steps {
