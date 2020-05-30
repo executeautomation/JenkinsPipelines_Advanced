@@ -10,9 +10,9 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('Script execution') {
           steps {
-              powershell '''
+            powershell '''
                 try
                 {
                     $response = Invoke-WebRequest -Uri http://localhost:81/ -ErrorAction Stop
@@ -27,10 +27,11 @@ pipeline {
               '''
           }
         }
+
       }
     }
 
-    stage('') {
+    stage('Deploy') {
       steps {
         input(message: 'Are you sure to deploy', ok: 'Yes')
       }
