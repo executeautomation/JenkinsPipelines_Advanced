@@ -42,6 +42,6 @@ pipeline {
 
   }
   environment {
-    SELENIUM = 'c:\\driver\\wins'
+    SELENIUM = 'c:\\driver\\win'
   }
 }
