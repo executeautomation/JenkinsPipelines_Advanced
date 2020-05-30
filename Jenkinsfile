@@ -4,7 +4,7 @@ pipeline {
     stage('error') {
       steps {
         echo "Get the chromedriver path : ${SELENIUM}"
-        sh '.build.sh'
+        sh 'chmod +x build.sh'
       }
     }
 
