@@ -40,6 +40,12 @@ pipeline {
       }
     }
 
+    stage('Deployed') {
+      steps {
+        writeFile(file: 'deployed', text: 'deployed ${SELENIUM"')
+      }
+    }
+
   }
   environment {
     SELENIUM = 'c:\\driver\\win'
