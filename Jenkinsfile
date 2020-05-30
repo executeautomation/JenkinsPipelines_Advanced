@@ -15,6 +15,7 @@ pipeline {
             script{
               def msg = powershell(returnStdout: true, script: "./script/build.ps1")
               println msg
+              VARIABLE=msg
             }
           }
         }
@@ -33,12 +34,13 @@ pipeline {
 
     stage('Deployed') {
       steps {
-        writeFile(file: 'deployed.txt', text: "deployed to ${SELENIUM}")
+        writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
       }
     }
 
   }
   environment {
     SELENIUM = 'c:\\driver\\win'
+    VARIABLE=''
   }
 }
