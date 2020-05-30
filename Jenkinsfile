@@ -3,13 +3,13 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        echo 'Get the chromedriver path : "${seleniumdriver}"'
+        echo 'Get the chromedriver path : "${SELENIUM}"'
         sh 'echo "Hello everyone"'
       }
     }
 
   }
   environment {
-    seleniumdriver = 'c:\\driver\\win'
+    SELENIUM = 'c:\\driver\\win'
   }
 }
