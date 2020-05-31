@@ -1,7 +1,7 @@
 pipeline {
   agent {
       docker {
-          images 'mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim'
+          images 'mcr.microsoft.com\dotnet\core\aspnet:3.1-buster-slim'
       }
   }
   stages {
