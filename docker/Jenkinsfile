@@ -1,61 +1,12 @@
 pipeline {
-  agent {
-      docker {
-          image 'mcr.microsoft.com\dotnet\core\aspnet:3.1-buster-slim'
-      }
-  }
-  stages {
-    stage('Verify') {
-      parallel {
-        stage('Docker Details') {
-          steps {
-            echo "Get the chromedriver path : ${SELENIUM}"
-            pwsh '''
-                dotnet --list-sdks
-            '''
-          }
-        }
-
-        stage('Build') {
-          steps {
-           pwsh '''
-                dotnet build "$WORKSPACE/src/EAApp/EAApp.csproj"
-           '''
-
-          }
-        }
-
-      }
+    agent {
+        docker { image 'node:7-alpine' }
     }
-
-    stage('Publish') {
-      steps {
-        pwsh '''
-            dotnet publish "EAApp.csproj" -c Release -o /app/publish
-        '''
-      }
-    }
-
-    stage('Post Build') {
-      parallel {
-        stage('Generate File') {
-          steps {
-            writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
-          }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
         }
-
-        stage('Archive file') {
-          steps {
-            archiveArtifacts(artifacts: 'deployed.txt', excludes: '*.log')
-          }
-        }
-
-      }
     }
-
-  }
-  environment {
-    SELENIUM = 'c:\\driver\\win'
-    VARIABLE = ''
-  }
 }
