@@ -1,22 +1,26 @@
 pipeline {
-  agent any
+  agent {
+      docker {
+          images 'mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim'
+      }
+  }
   stages {
-    stage('Get Env') {
+    stage('Verify') {
       parallel {
-        stage('Get Env') {
+        stage('Docker Details') {
           steps {
             echo "Get the chromedriver path : ${SELENIUM}"
-            pwsh 'Write-Output "Hello Worlds"'
+            pwsh '''
+                dotnet --list-sdks
+            '''
           }
         }
 
-        stage('Script execution') {
+        stage('Build') {
           steps {
-            script {
-              def msg = powershell(returnStdout: true, script: "./script/build.ps1")
-              println msg
-              VARIABLE=msg
-            }
+           pwsh '''
+                dotnet build "$WORKSPACE/src/EAApp/EAApp.csproj"
+           '''
 
           }
         }
@@ -24,12 +28,11 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
-      when {
-        branch 'master'
-      }
+    stage('Publish') {
       steps {
-        input(message: 'Are you sure to deploy', ok: 'Yes')
+        pwsh '''
+            dotnet publish "EAApp.csproj" -c Release -o /app/publish
+        '''
       }
     }
 
