@@ -5,7 +5,6 @@ pipeline {
     }
 
   }
-  stages {
     stage('Verify') {
         stage('Docker Details') {
           steps {
@@ -43,7 +42,7 @@ pipeline {
       }
     }
 
-  }
+
   environment {
     SELENIUM = 'c:\\driver\\win'
     VARIABLE = ''
