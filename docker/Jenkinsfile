@@ -4,6 +4,8 @@ pipeline {
       image 'executeautomation/jenkinsagent:agent'
     }
   }
+    stages {
+      stage('Build') {
         stage('Docker Details') {
           steps {
             echo "Get the chromedriver path : ${SELENIUM}"
@@ -14,6 +16,8 @@ pipeline {
                sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
+      }
+    }
   environment {
     SELENIUM = 'c:\\driver\\win'
     VARIABLE = ''
