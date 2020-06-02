@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
           steps {
            
-                dotnet build "$WORKSPACE/src/EAApp/EAApp.csproj"
+               sh 'dotnet build "$WORKSPACE/src/EAApp/EAApp.csproj"'
 
           }
         }
@@ -28,7 +28,7 @@ pipeline {
     stage('Publish') {
       steps {
 
-            dotnet publish "EAApp.csproj" -c Release -o /app/publish
+            sh 'dotnet publish EAApp.csproj -c Release -o /app/publish'
       }
     }
 
