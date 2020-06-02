@@ -1,8 +1,9 @@
 pipeline {
   agent {
-      docker {
-        image 'executeautomation/jenkinsagent'
-      }
+    docker {
+      image 'executeautomation/jenkinsagent'
+    }
+
   }
   stages {
     stage('Verify') {
@@ -18,10 +19,9 @@ pipeline {
 
         stage('Build') {
           steps {
-           pwsh '''
+            pwsh '''
                 dotnet build "$WORKSPACE/src/EAApp/EAApp.csproj"
            '''
-
           }
         }
 
