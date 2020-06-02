@@ -10,6 +10,7 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
+              sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj" --force'
                sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
