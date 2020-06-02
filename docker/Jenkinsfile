@@ -11,9 +11,6 @@ pipeline {
         stage('Docker Details') {
           steps {
             echo "Get the chromedriver path : ${SELENIUM}"
-            pwsh '''
-                dotnet --list-sdks
-            '''
           }
         }
 
