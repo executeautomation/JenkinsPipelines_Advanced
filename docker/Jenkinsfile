@@ -18,22 +18,7 @@ pipeline {
       }
     }
     
-    stage('Post Build') {
-      parallel {
-        stage('Generate File') {
-          steps {
-            writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
-          }
-        }
 
-        stage('Archive file') {
-          steps {
-            archiveArtifacts(artifacts: 'deployed.txt', excludes: '*.log')
-          }
-        }
-
-      }
-    }
 
   }
   environment {
