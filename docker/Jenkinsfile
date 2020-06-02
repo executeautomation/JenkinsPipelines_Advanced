@@ -7,22 +7,16 @@ pipeline {
   }
   stages {
     stage('Verify') {
-      parallel {
         stage('Docker Details') {
           steps {
             echo "Get the chromedriver path : ${SELENIUM}"
           }
         }
-
         stage('Build') {
-          steps {
-           
-               sh 'dotnet build "/src/EAApp.csproj"'
-
+          steps {         
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
-
-      }
     }
     
    stage('Publish') {
