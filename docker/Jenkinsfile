@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
           steps {
            
-               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/build'
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
 
           }
         }
