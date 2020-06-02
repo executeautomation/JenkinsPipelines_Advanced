@@ -5,24 +5,41 @@ pipeline {
     }
 
   }
-stage('Docker Details') {
-  steps {
-    echo "Get the chromedriver path : ${SELENIUM}"
-  }
-}
-stage('Build') {
-  steps {         
-       sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
-  }
-}
+  stages {
+        stage('Docker Details') {
+          steps {
+            echo "Get the chromedriver path : ${SELENIUM}"
+          }
+        }
+        stage('Build') {
+          steps {         
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
+          }
+        }
+   
+   stage('Publish') {
+      steps {
 
-    
-stage('Publish') {
-  steps {
+            sh 'dotnet publish "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/publish'
+      }
+    }
 
-        sh 'dotnet publish "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/publish'
-  }
-}
+    stage('Post Build') {
+      parallel {
+        stage('Generate File') {
+          steps {
+            writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
+          }
+        }
+
+        stage('Archive file') {
+          steps {
+            archiveArtifacts(artifacts: 'deployed.txt', excludes: '*.log')
+          }
+        }
+
+      }
+    }
 
   environment {
     SELENIUM = 'c:\\driver\\win'
