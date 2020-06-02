@@ -3,21 +3,38 @@ pipeline {
     docker {
       image 'executeautomation/jenkinsagent:agent'
     }
+
   }
-    stages {
-      stage('Build') {
-        stage('Docker Details') {
-          steps {
-            echo "Get the chromedriver path : ${SELENIUM}"
-          }
-        }
+  stages {
+    stage('Verify') {
+      parallel {
         stage('Build') {
-          steps {         
+          steps {
                sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
+
       }
     }
+    
+    stage('Post Build') {
+      parallel {
+        stage('Generate File') {
+          steps {
+            writeFile(file: 'deployed.txt', text: "deployed to ${VARIABLE}")
+          }
+        }
+
+        stage('Archive file') {
+          steps {
+            archiveArtifacts(artifacts: 'deployed.txt', excludes: '*.log')
+          }
+        }
+
+      }
+    }
+
+  }
   environment {
     SELENIUM = 'c:\\driver\\win'
     VARIABLE = ''
