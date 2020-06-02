@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'executeautomation/jenkinsagent:latest'
+      image 'executeautomation/jenkinsagent:agent'
     }
 
   }
