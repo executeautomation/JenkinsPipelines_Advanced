@@ -17,15 +17,15 @@ pipeline {
         stage('Build') {
           steps {
            
-               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/build'
 
           }
         }
 
       }
     }
-
-    stage('Publish') {
+    
+   stage('Publish') {
       steps {
 
             sh 'dotnet publish "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/publish'
