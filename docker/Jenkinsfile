@@ -14,11 +14,13 @@ pipeline {
     stage('Build') {
           steps {
                sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
+	       
           }
         }
 
     stage('Publish') {
           steps {
+	      sh 'dotnet publish "$WORKSPACE/src/EAApp.csproj"'
               archiveArtifacts artifacts: 'bin/Debug/netcoreapp3.1/publish/*'
           }
         }
