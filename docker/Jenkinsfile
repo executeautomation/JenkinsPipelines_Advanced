@@ -19,7 +19,7 @@ pipeline {
 
     stage('Publish') {
           steps {
-              archiveArtifacts artifacts: 'src/*.*'
+              archiveArtifacts artifacts: 'bin/Debug/netcoreapp3.1/publish/*'
           }
         }
   }
