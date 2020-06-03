@@ -21,7 +21,7 @@ pipeline {
     stage('Publish') {
           steps {
 	      sh 'dotnet publish "$WORKSPACE/src/EAApp.csproj"'
-              archiveArtifacts artifacts: 'bin/Debug/netcoreapp3.1/publish/*'
+              archiveArtifacts artifacts: 'src/bin/Debug/netcoreapp3.1/publish/*'
           }
         }
   }
