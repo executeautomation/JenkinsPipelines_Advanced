@@ -14,13 +14,13 @@ pipeline {
     stage('Build') {
           steps {
               sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj" --force'
-               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj -c Release -o $WORKSPACE/src/app/build"'
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
 
     stage('Publish') {
           steps {
-              sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj -c Release -o $WORKSPACE/src/app/publish'
+              archiveArtifacts artifacts: '$WORKSPACE/src/*.*'
           }
         }
   }
