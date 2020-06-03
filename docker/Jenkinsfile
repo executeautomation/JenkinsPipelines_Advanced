@@ -6,19 +6,17 @@ pipeline {
 
   }
   stages {
-    stage('Verify') {
-      parallel {
-        stage('Build') {
+    stage('SCM') {
+        steps {
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FeynmanFan/JenkinsDocker']]])
+	    }
+    }
+    stage('Build') {
           steps {
               sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj" --force'
                sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
           }
         }
-
-      }
-    }
-    
-
 
   }
   environment {
