@@ -8,16 +8,21 @@ pipeline {
   stages {
     stage('SCM') {
         steps {
-		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/executeautomation/JenkinsPipelines']]])
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FeynmanFan/JenkinsDocker']]])
 	    }
     }
     stage('Build') {
           steps {
               sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj" --force'
-               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj"'
+               sh 'dotnet build "$WORKSPACE/src/EAApp.csproj -c Release -o /app/build"'
           }
         }
 
+    stage('Publish') {
+          steps {
+              sh 'dotnet restore "$WORKSPACE/src/EAApp.csproj" -c Release -o /app/publish'
+          }
+        }
   }
   environment {
     SELENIUM = 'c:\\driver\\win'
