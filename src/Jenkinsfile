@@ -1,0 +1,11 @@
+pipeline{
+  dockerfile true
+  
+  stages {
+    stage('Build') {
+      steps {
+        sh 'dotnet --version'
+        sh 'pwd'
+      }
+    }
+}
