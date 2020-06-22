@@ -8,4 +8,5 @@ pipeline{
         sh 'pwd'
       }
     }
+  }
 }
